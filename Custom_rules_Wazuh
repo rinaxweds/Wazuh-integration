@@ -1,0 +1,33 @@
+<!--
+  Wazuh - Manager - Custom rules
+  Date: March 2025
+-->
+
+<group name="custom_intrusion_rules">
+    <!-- Detect Unauthorized SSH Access Attempts -->
+    <rule id="100010" level="8" overwrite="yes">
+        <if_sid>5760,2502,5719,5503,5700,5716</if_sid>
+        <match>authentication failed|User missed the password|User login failed|Failed password|Failed keyboard|authentication error|more authentication failures|REPEATED login failures</match>
+        <description>Unauthorized SSH access attempt detected</description>
+    </rule>
+
+        
+   <rule id="100020" level="12" overwrite="yes">
+    <if_sid>52502</if_sid>
+    <description>Custom Malware Detection - ClamAV identified malware activity</description>
+    <group>malware,security</group>
+    </rule>
+
+  
+
+    <rule id="100030" level="10" overwrite="yes">
+    <if_sid>86601</if_sid>
+    <match>SURICATA|ICMPv4 unknown code|alert.signature</match>
+    <description>Network scan or reconnaissance attempt detected by Suricata</description>
+    <group>network, reconnaissance, security</group>
+</rule>
+
+
+    
+</group>
+
